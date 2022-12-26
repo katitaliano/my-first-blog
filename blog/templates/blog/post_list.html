@@ -8,16 +8,21 @@
             <h1><a href="/">Django Girls Blog</a></h1>
         </header>
 
-        <article>
-            <time>published: 14.06.2014, 12:14</time>
-            <h2><a href="">My first post</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        </article>
+{% for post in posts %}
+    <article>
+        <time>published: {{ post.published_date }}</time>
+        <h2><a href="">{{ post.title }}</a></h2>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </article>
+{% endfor %}
 
-        <article>
-            <time>published: 14.06.2014, 12:14</time>
-            <h2><a href="">My second post</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut f.</p>
-        </article>
     </body>
 </html>
+
+
+-- In HTML, you can't really write Python code, because browsers don't understand it. They know only HTML. We know that HTML is rather static, while Python is much more dynamic. Django template tags allow us to transfer Python-like things into HTML, so you can build dynamic websites faster. 
+
+-- To print a variable in Django templates, we use double curly brackets with the variable's name inside, like this: {{ posts }}
+
+-- Have you noticed that we used a slightly different notation this time ({{ post.title }} or {{ post.text }})? We are accessing data in each of the fields defined in our Post model. Also, the |linebreaksbr is piping the posts' text through a filter to convert line-breaks into paragraphs.
+
